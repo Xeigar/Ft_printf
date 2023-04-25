@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:17:34 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/25 18:18:36 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2023/04/25 18:33:17 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,15 @@ flag_check(const char *txt, int i)
 	{
 		//fazer contagem na estrutura e envolver a acao dos plug ins		
 	}
-	
+	if (txt[i] == 'c')
+	if (txt[i] == 's')
+	if (txt[i] == 'p')
+	if (txt[i] == 'd')
+	if (txt[i] == 'i')
+	if (txt[i] == 'u')
+	if (txt[i] == 'x')
+	if (txt[i] == 'X')
+	if (txt[i] == '%')
 }
 
 int	ft_printf(const char *txt,...)
