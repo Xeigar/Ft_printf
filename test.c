@@ -1,6 +1,10 @@
 int main()
 {
-    //printf("%w\n", 15);
-    printf("%%%%%w", 15000.00);
+    int item = 12;
+
+
+   printf("%##x\n", item);
+   printf("%x\n", item);
+   printf("%x\n", item);
     return 0;
 }

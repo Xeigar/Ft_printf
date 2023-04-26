@@ -2,6 +2,7 @@
 # define LIBFTPRINTF_H
 
 #include <stdlib.h>
+#include <stdarg.h>
 
 typedef struct s_struct
 {
@@ -11,7 +12,6 @@ typedef struct s_struct
 	int   zero;       // zero padding
 	int   pnt;        // .
 	int   dash;       // -
-	
 	int   sign;       // pos or neg number  
 	int   is_zero;    // is number zero  
 	int   perc;       // %
