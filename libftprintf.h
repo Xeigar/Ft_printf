@@ -1,8 +1,9 @@
 #ifndef LIBFTPRINTF_H
 # define LIBFTPRINTF_H
 
-#include <stdlib.h>
-#include <stdarg.h>
+# include <stdlib.h>
+# include <stdarg.h>
+# include "libft.h"
 
 typedef struct s_struct
 {
