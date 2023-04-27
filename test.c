@@ -1,10 +1,10 @@
 int main()
 {
-    int item = 12;
+    char *item = "Hello";
 
 
-   printf("%##x\n", item);
-   printf("%x\n", item);
-   printf("%x\n", item);
+   printf("%10s\n", item);
+   //printf("%-04c\n", item);
+   //printf("%i\c", item);
     return 0;
 }

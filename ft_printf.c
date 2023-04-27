@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:17:34 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/25 18:33:17 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2023/04/27 11:23:24 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,11 @@
 t_struct *initialise_tab(t_struct *tab)                       
 {
 	tab->wdt = 0;
-	tab->prc = 0;
 	tab->car = 0;
 	tab->zero = 0;
 	tab->pnt = 0;
 	tab->plus = 0;
-	tab->tl = 0;
-	tab->is_zero = 0;
+	tab->len = 0;
 	tab->dash = 0;
 	tab->perc = 0;
 	tab->sp = 0;
@@ -33,7 +31,7 @@ int	descriptor_check(char i)
 	int		i;
 	char *arr;
 
-	arr = "cspduxX%%";
+	arr = "cspduxX%";
 	i = 0;
 	while(arr[i])
 	{
@@ -45,7 +43,7 @@ int	descriptor_check(char i)
 	
 }
 
-flag_check(t_struct *ptr, const char *txt, int i)
+int	flag_check(t_struct *ptr, const char *txt, int i)
 {
 	while (descriptor_check(txt[i]) == 1)//fazer contagem na estrutura e envolver a acao dos plug ins
 	{
@@ -84,26 +82,32 @@ flag_check(t_struct *ptr, const char *txt, int i)
 		ft_print_Hex(ptr);
 	if (txt[i] == '%')
 		ft_print_per(ptr);
+	return (ptr->len);
 }
 
 int	ft_printf(const char *txt,...)
 {
 	int	i;
+	int len;
 	t_struct	*ptr;
 
 	ptr =(t_struct *)malloc(sizeof(* ptr));
 	if (!ptr)
 		return (- 1);
 	va_start(ptr->arg, txt);
+	len = 0;
+	i = 0;
 	initialise_tab(ptr);
 	while(txt[i])
 	{
 		if (txt[i] == '%')
-			A;//Function to check the next caracters;
+			len += flag_check(ptr, txt, i + 1);//Function to check the next caracters;
 		else
-			write(1, &txt[i], 1);
+			len += write(1, &txt[i], 1);
 		initialise_tab(ptr);
 		i++;
 	}
 	va_end(ptr->arg);
+	free(ptr);
+	return (len);
 }
