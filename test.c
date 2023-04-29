@@ -1,11 +1,13 @@
-#include <stdlib.h>
+#include <stdio.h>
+#include "ft_printf.h"
 
 int main()
 {
-    char *item = "Hello";
+    void *item = -1;
 
-
-   printf("%s\n", NULL);
+   int i = printf("%c\n", 'h');
+   int j = ft_printf("%c\n", 'h');
+   printf("real: %i \nmine: %i\n", i, j);
    //printf("%-04c\n", item);
    //printf("%i\c", item);
     return 0;

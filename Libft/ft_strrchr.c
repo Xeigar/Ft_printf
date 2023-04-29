@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_hex.c                                     :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 13:33:52 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/28 23:12:20 by tmoutinh         ###   ########.fr       */
+/*   Created: 2023/04/11 14:57:08 by tmoutinh          #+#    #+#             */
+/*   Updated: 2023/04/11 19:33:05 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-static void	ft_puthex(unsigned int i, t_struct *ptr)
+char	*ft_strrchr(const char *s, int c)
 {
-	if (i >= 16)
+	int	size;
+
+	size = ft_strlen(s);
+	while (size >= 0)
 	{
-		ft_puthex(i / 16, ptr);
-		ft_puthex(i % 16, ptr);
+		if (s[size] == (char)c)
+			return ((char *)(s + size));
+		size--;
 	}
-	else
-	{
-		if (i <= 9)
-			ft_putchar_fd((i + 48), 1);
-		else
-			ft_putchar_fd((i - 10 + 'a'), 1);
-		ptr->len += 1;
-	}
+	return (NULL);
 }
 
-void	ft_print_hex(t_struct *ptr)
+/*
+#include <stdio.h>
+int main(void)
 {
-	unsigned int	i;
-
-	i = va_arg(ptr->arg, unsigned int);
-	ft_puthex(i, ptr);
-}
+	printf("%s\n", ft_strrchr("Hello how", 'h'));
+	return 0;
+}*/

@@ -6,13 +6,13 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:17:34 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/27 11:23:24 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2023/04/29 01:07:23 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libftprintf.h"
+#include "ft_printf.h"
 
-t_struct *initialise_tab(t_struct *tab)                       
+t_struct	*initialise_tab(t_struct *tab)
 {
 	tab->wdt = 0;
 	tab->car = 0;
@@ -26,26 +26,25 @@ t_struct *initialise_tab(t_struct *tab)
 	return (tab);
 }
 
-int	descriptor_check(char i)
+int	flag_check(char i)
 {
-	int		i;
-	char *arr;
+	int		j;
+	char	*arr;
 
-	arr = "cspduxX%";
-	i = 0;
-	while(arr[i])
+	arr = "+- #0.";
+	j = 0;
+	while (arr[j])
 	{
-		if (i == arr[i])
-			return (0);
-		i++;
+		if (i == arr[j] || (i >= '1' && i <= '9'))
+			return (1);
+		j++;
 	}
-	return (1);
-	
+	return (0);
 }
 
-int	flag_check(t_struct *ptr, const char *txt, int i)
+void flag_count(int i, const char *txt, t_struct *ptr)
 {
-	while (descriptor_check(txt[i]) == 1)//fazer contagem na estrutura e envolver a acao dos plug ins
+	while (flag_check(txt[i]) == 1)
 	{
 		if (txt[i++] == '#')
 			ptr->car = 1;
@@ -62,52 +61,64 @@ int	flag_check(t_struct *ptr, const char *txt, int i)
 		if (txt[i] > '0' && txt[i] <= '9')
 		{
 			ptr->wdt = ft_atoi(txt + i);
-			while(txt[i] > '0' && txt[i] <= '9')
+			while (txt[i] > '0' && txt[i] <= '9')
 				i++;
 		}
 	}
-	if (txt[i] == 'c')
-		ft_print_char(ptr);
-	if (txt[i] == 's')
-		ft_print_str(ptr);
-	if (txt[i] == 'p')
-		ft_print_void(ptr);
-	if (txt[i] == 'd' || txt[i] == 'i')
-		ft_print_int(ptr);
-	if (txt[i] == 'u')
-		ft_print_usgn(ptr);
-	if (txt[i] == 'x')
-		ft_print_hex(ptr);
-	if (txt[i] == 'X')
-		ft_print_Hex(ptr);
-	if (txt[i] == '%')
-		ft_print_per(ptr);
-	return (ptr->len);
+	return ;
 }
 
-int	ft_printf(const char *txt,...)
+int	checker(t_struct *ptr, const char *txt, int i)
 {
-	int	i;
-	int len;
+	flag_count(i, txt, ptr);
+	if (txt[i] == 'c')
+		ft_print_char(ptr);
+	else if (txt[i] == 's')
+		ft_print_str(ptr);
+	else if (txt[i] == 'p')
+		ft_print_void(ptr);
+	else if (txt[i] == 'i' || txt[i] == 'd')
+		ft_print_int(ptr);
+	else if (txt[i] == 'u')
+		ft_print_usgn(ptr);
+	else if (txt[i] == 'x')
+		ft_print_hex(ptr);
+	else if (txt[i] == 'X')
+		ft_print_bhex(ptr);
+	else if (txt[i] == '%')
+		ft_print_per(ptr);
+	else
+	{
+		ptr->len += write(1, "%", 1);
+		i--;
+	}
+	return (i);
+}
+
+int	ft_printf(const char *txt, ...)
+{
+	int			i;
+	int			len;
 	t_struct	*ptr;
 
-	ptr =(t_struct *)malloc(sizeof(* ptr));
+	ptr = (t_struct *)malloc(sizeof(*ptr));
 	if (!ptr)
-		return (- 1);
+		return (-1);
 	va_start(ptr->arg, txt);
 	len = 0;
 	i = 0;
 	initialise_tab(ptr);
-	while(txt[i])
+	while (txt[i])
 	{
 		if (txt[i] == '%')
-			len += flag_check(ptr, txt, i + 1);//Function to check the next caracters;
+			i = checker(ptr, txt, i + 1);
 		else
 			len += write(1, &txt[i], 1);
+		len += ptr->len;
 		initialise_tab(ptr);
 		i++;
 	}
 	va_end(ptr->arg);
-	free(ptr);
+	free (ptr);
 	return (len);
 }

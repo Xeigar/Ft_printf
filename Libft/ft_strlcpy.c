@@ -1,38 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_hex.c                                     :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 13:33:52 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/28 23:12:20 by tmoutinh         ###   ########.fr       */
+/*   Created: 2023/04/11 14:54:47 by tmoutinh          #+#    #+#             */
+/*   Updated: 2023/04/11 14:55:01 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-static void	ft_puthex(unsigned int i, t_struct *ptr)
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	if (i >= 16)
+	size_t	i;
+	size_t	n;
+
+	i = 0;
+	n = ft_strlen(src);
+	if (size == 0)
+		return (n);
+	while (src[i] && i < size - 1)
 	{
-		ft_puthex(i / 16, ptr);
-		ft_puthex(i % 16, ptr);
+		dst[i] = src[i];
+		i++;
 	}
-	else
-	{
-		if (i <= 9)
-			ft_putchar_fd((i + 48), 1);
-		else
-			ft_putchar_fd((i - 10 + 'a'), 1);
-		ptr->len += 1;
-	}
+	dst[i] = '\0';
+	return (n);
 }
 
-void	ft_print_hex(t_struct *ptr)
+/*int main (void)
 {
-	unsigned int	i;
-
-	i = va_arg(ptr->arg, unsigned int);
-	ft_puthex(i, ptr);
-}
+	char *src="bleh bleh";
+	char dest[10];
+	ft_strlcpy(dest, src, 5);
+	printf("%s \n", dest);
+	printf("%i \n", ft_strlcpy(dest, src, 8));
+	return 0;
+}*/

@@ -1,38 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_hex.c                                     :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 13:33:52 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/28 23:12:20 by tmoutinh         ###   ########.fr       */
+/*   Created: 2023/04/11 14:45:56 by tmoutinh          #+#    #+#             */
+/*   Updated: 2023/04/11 19:03:51 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-static void	ft_puthex(unsigned int i, t_struct *ptr)
-{
-	if (i >= 16)
-	{
-		ft_puthex(i / 16, ptr);
-		ft_puthex(i % 16, ptr);
-	}
-	else
-	{
-		if (i <= 9)
-			ft_putchar_fd((i + 48), 1);
-		else
-			ft_putchar_fd((i - 10 + 'a'), 1);
-		ptr->len += 1;
-	}
-}
-
-void	ft_print_hex(t_struct *ptr)
+void	ft_striteri(char *s, void (*f)(unsigned int, char *))
 {
 	unsigned int	i;
 
-	i = va_arg(ptr->arg, unsigned int);
-	ft_puthex(i, ptr);
+	i = 0;
+	if (!s || !f)
+		return ;
+	while (s[i])
+	{
+		f(i, s + i);
+		i++;
+	}
 }
+
+/*
+char add(unsigned int i, char s)
+{
+	(void) i;
+	s = s +1;
+	return (s);
+}
+int main(void)
+{
+	printf("%s\n", ft_strmapi("Hello", &add));
+	return 0;
+}
+*/

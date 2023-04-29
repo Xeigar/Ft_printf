@@ -1,38 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_hex.c                                     :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 13:33:52 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/28 23:12:20 by tmoutinh         ###   ########.fr       */
+/*   Created: 2023/04/11 15:01:26 by tmoutinh          #+#    #+#             */
+/*   Updated: 2023/04/11 19:35:50 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
-
-static void	ft_puthex(unsigned int i, t_struct *ptr)
+int	ft_tolower(int c)
 {
-	if (i >= 16)
+	int	i;
+
+	i = 0;
+	if (c >= 'A' && c <= 'Z')
 	{
-		ft_puthex(i / 16, ptr);
-		ft_puthex(i % 16, ptr);
+		i = c + ('a' - 'A');
+		return (i);
 	}
-	else
-	{
-		if (i <= 9)
-			ft_putchar_fd((i + 48), 1);
-		else
-			ft_putchar_fd((i - 10 + 'a'), 1);
-		ptr->len += 1;
-	}
+	return (c);
 }
 
-void	ft_print_hex(t_struct *ptr)
+/*
+#include <stdio.h>
+int main(void)
 {
-	unsigned int	i;
+	char a;
+	char b;
 
-	i = va_arg(ptr->arg, unsigned int);
-	ft_puthex(i, ptr);
-}
+	a = 'A';
+	b = 'b';
+	printf("%c\n%c\n", ft_tolower(a), ft_tolower(b));
+	return 0;
+}*/

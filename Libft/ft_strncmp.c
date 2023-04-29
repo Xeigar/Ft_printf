@@ -1,38 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_hex.c                                     :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 13:33:52 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/28 23:12:20 by tmoutinh         ###   ########.fr       */
+/*   Created: 2023/04/11 14:56:25 by tmoutinh          #+#    #+#             */
+/*   Updated: 2023/04/11 19:25:39 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-static void	ft_puthex(unsigned int i, t_struct *ptr)
+int	ft_strncmp(const char *s1, const char *s2, size_t n)
 {
-	if (i >= 16)
+	size_t	i;
+
+	i = 0;
+	if (!n && (!*s1 || !*s2))
+		return (0);
+	while ((s1[i] || s2[i]) && i < n)
 	{
-		ft_puthex(i / 16, ptr);
-		ft_puthex(i % 16, ptr);
+		if (s1[i] != s2[i])
+			return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+		i++;
 	}
-	else
-	{
-		if (i <= 9)
-			ft_putchar_fd((i + 48), 1);
-		else
-			ft_putchar_fd((i - 10 + 'a'), 1);
-		ptr->len += 1;
-	}
+	return (0);
 }
 
-void	ft_print_hex(t_struct *ptr)
+/*int main()
 {
-	unsigned int	i;
-
-	i = va_arg(ptr->arg, unsigned int);
-	ft_puthex(i, ptr);
-}
+		printf("%d\n", ft_strncmp("", "as", 4 * sizeof(char)));
+		return 0;
+}*/

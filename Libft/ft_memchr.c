@@ -1,38 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_hex.c                                     :+:      :+:    :+:   */
+/*   ft_memchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 13:33:52 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/28 23:12:20 by tmoutinh         ###   ########.fr       */
+/*   Created: 2023/04/11 14:38:21 by tmoutinh          #+#    #+#             */
+/*   Updated: 2023/04/11 19:32:17 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-static void	ft_puthex(unsigned int i, t_struct *ptr)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
-	if (i >= 16)
+	size_t			i;
+	unsigned char	d;
+	unsigned char	*sv;
+
+	d = (unsigned char)c;
+	sv = (unsigned char *)s;
+	i = 0;
+	while (i < n)
 	{
-		ft_puthex(i / 16, ptr);
-		ft_puthex(i % 16, ptr);
+		if (*(sv) == d)
+			return ((void *)sv);
+		sv++;
+		i++;
 	}
-	else
-	{
-		if (i <= 9)
-			ft_putchar_fd((i + 48), 1);
-		else
-			ft_putchar_fd((i - 10 + 'a'), 1);
-		ptr->len += 1;
-	}
+	return (NULL);
 }
 
-void	ft_print_hex(t_struct *ptr)
+/*
+#include <stdio.h>
+int main(void)
 {
-	unsigned int	i;
-
-	i = va_arg(ptr->arg, unsigned int);
-	ft_puthex(i, ptr);
-}
+	printf("%s\n", ft_memchr("Hello how", 'h', 3));
+	return 0;
+}*/

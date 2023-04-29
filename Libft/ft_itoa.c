@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_usgn.c                                    :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 11:58:36 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/28 18:27:33 by tmoutinh         ###   ########.fr       */
+/*   Created: 2023/04/11 14:33:19 by tmoutinh          #+#    #+#             */
+/*   Updated: 2023/04/11 19:18:49 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-static unsigned int	base(unsigned int n)
+int	base(int n)
 {
 	int	size;
 
 	size = 0;
-	if (n == 0)
-		size ++;
+	if (n <= 0)
+		size++;
 	while (n != 0)
 	{
 		size++;
@@ -27,17 +27,22 @@ static unsigned int	base(unsigned int n)
 	return (size);
 }
 
-static char	*ft_uitoa(unsigned int n)
+char	*ft_itoa(int n)
 {
-	char				*tab;
-	unsigned int		size;
-	unsigned long int	i;
+	char	*tab;
+	int		size;
+	long	i;
 
 	i = n;
 	size = base(n);
 	tab = (char *)malloc(sizeof(*tab) * (size + 1));
 	if (!tab)
 		return (NULL);
+	if (i < 0)
+	{		
+		tab[0] = '-';
+		i = -i;
+	}
 	tab[size] = '\0';
 	if (i == 0)
 		tab[0] = (n + 48);
@@ -50,14 +55,8 @@ static char	*ft_uitoa(unsigned int n)
 	return (tab);
 }
 
-void	ft_print_usgn(t_struct *ptr)
+/*int main(void)
 {
-	unsigned int	i;
-	char			*p;
-
-	i = va_arg(ptr->arg, unsigned int);
-	p = ft_uitoa(i);
-	ft_putstr_fd(p, 1);
-	ptr->len = ft_strlen(p);
-	free (p);
-}
+	printf("%s\n", ft_itoa(123156));
+	return (0);
+}*/

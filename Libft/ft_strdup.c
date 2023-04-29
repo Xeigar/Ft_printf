@@ -1,38 +1,42 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_print_hex.c                                     :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 13:33:52 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/28 23:12:20 by tmoutinh         ###   ########.fr       */
+/*   Created: 2023/04/11 14:45:28 by tmoutinh          #+#    #+#             */
+/*   Updated: 2023/04/11 19:21:08 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "ft_printf.h"
+#include "libft.h"
 
-static void	ft_puthex(unsigned int i, t_struct *ptr)
+char	*ft_strdup(const char *s)
 {
-	if (i >= 16)
+	char	*p;
+	int		size;
+	int		i;
+
+	i = 0;
+	size = ft_strlen(s);
+	p = (char *)malloc(sizeof(*p) * (size + 1));
+	if (p == NULL)
+		return (NULL);
+	while (s[i])
 	{
-		ft_puthex(i / 16, ptr);
-		ft_puthex(i % 16, ptr);
+		p[i] = s[i];
+		i++;
 	}
-	else
-	{
-		if (i <= 9)
-			ft_putchar_fd((i + 48), 1);
-		else
-			ft_putchar_fd((i - 10 + 'a'), 1);
-		ptr->len += 1;
-	}
+	p[i] = '\0';
+	return (p);
 }
 
-void	ft_print_hex(t_struct *ptr)
+/*int main(void)
 {
-	unsigned int	i;
-
-	i = va_arg(ptr->arg, unsigned int);
-	ft_puthex(i, ptr);
-}
+	char *arra = "Hello";
+	
+	printf("%s", ft_strdup(arra));
+	
+	return (0);
+}*/
