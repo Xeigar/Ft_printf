@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:17:34 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/29 01:07:23 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2023/04/30 15:16:07 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	flag_check(char i)
 	return (0);
 }
 
-void flag_count(int i, const char *txt, t_struct *ptr)
+void	flag_count(int i, const char *txt, t_struct *ptr)
 {
 	while (flag_check(txt[i]) == 1)
 	{

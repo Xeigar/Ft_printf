@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/27 09:28:10 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/28 23:28:31 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2023/04/30 15:15:34 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,8 @@ void	ft_print_str(t_struct *ptr)
 
 void	ft_print_int(t_struct *ptr)
 {
-	long int		j;
-	char	*p;
+	long int	j;
+	char		*p;
 
 	j = va_arg(ptr->arg, int);
 	p = ft_itoa(j);
