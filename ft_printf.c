@@ -6,7 +6,7 @@
 /*   By: tmoutinh <tmoutinh@student.42porto.com     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 17:17:34 by tmoutinh          #+#    #+#             */
-/*   Updated: 2023/04/30 15:16:07 by tmoutinh         ###   ########.fr       */
+/*   Updated: 2023/05/01 13:57:07 by tmoutinh         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,11 @@ int	checker(t_struct *ptr, const char *txt, int i)
 		ft_print_bhex(ptr);
 	else if (txt[i] == '%')
 		ft_print_per(ptr);
+	else if (!txt[i])
+		return (0);
 	else
 	{
-		ptr->len += write(1, "%", 1);
+		ptr->len += write(1, "%", 6);
 		i--;
 	}
 	return (i);

@@ -19,9 +19,11 @@ all: $(NAME)
 
 clean:
 	rm -rf $(OBJT)
+	rm -rf $(LIB_DIR)*.o
 
 fclean: clean
 	rm -f $(NAME)
+	rm -rf $(LIB_DIR)libft.a
 
 re: fclean all
 
